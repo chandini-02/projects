@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<html>
+    <head>
+        <title>to-do list</title>
+        <style>
+            boby{
+                font-family:Arrial;
+                padding:30px;
+            }
+            input,select,button {
+                padding:8px;
+                margin:5px;
+            }
+            li{
+                margin:10px;
+                padding:10px;
+                border:1px solid gray;
+                width: 500px;
+            }
+            .completed{
+                 text-decoration: line-through;
+            }
+            .high{
+                color:red;
+            }
+            .medium{
+                color:orange;
+            }
+            .low{
+                color:green;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>to-do list</h1>
+        <input
+           type="text"
+           id="taskInput"
+           placeholder="Enter task"
+        >
+        <inputtype="date"
+           id="taskDate"
+        >
+        <selectid="priority">
+            <option value="high">high</option>
+            <option value="medium">medium</option>
+            <option value="low">low</option> 
+        </select>   
+        <button id="addBtn">
+            add task
+        </button>
+        <button id="clearBtn">
+             clear All
+        </button>
+        <br><br>
+        <input
+             type="text" 
+             id="searchInput"
+             placeholder="search task"    
+        >
+        <selectid="filter">
+             <option value="all">all</option>
+             <option value="pending">pending</option>
+             <option value="completed">completed</option>
+        </select>
+        <h3 id="counter">
+            total:0 | completed:0 | pending:0
+        </h3>
+        <ol id="taskList"></ol>
+    </body>
+    <script>
+     let taskInput = document.getElementById("taskInput");
+     let taskDate = document.getElementById("taskDate");
+     let priority = document.getElementById("priority");
+     let addBtn = document.getElementById("addBtn");
+     let clearBtn = document.getElementById("clearBtn");
+     let searchInput = document.getElementById("searchInput");
+     let fliter = document.getElementById("fliter");
+     let taskList = document.getElementById("taskList");
+     let counter = document.getElementById("counter");
+            let tasks = [];
+            let editIndex = -1;
+            addBtn.addEventListener("click", function ()
+            {
+                let task = taskInput.value.trim();
+                if (task ===""){
+                    alert("please enter a task!");
+                    return;
+                }
+            if(editIndex !== -1)
+            {
+                tasks[editIndex].name= task;
+                tasks[editIndex].date = taskDate.value;
+                tasks[editIndex].priority = priority.value;
+                editIndex=-1;
+                addBtn.textContent="addtask";
+            }
+
+            else{
+                let newTask ={
+                    name : task,
+                    date : taskDate.value,
+                    priority:priority.value,
+                    completed: false
+                };
+                tasks.push(newTask);
+
+            }
+            taskInput.value ="";
+            taskDate.value="";
+            displayTasks();
+        }
+        );
+        function displayTasks() {
+            taskList.innerHtml="";
+            let searchText = 
+            searchInput.value.toLowerCase();
+
+            let selectedFilter = Filter.value;
+            let displayNumber = 1;
+            tasks.forEach(function(task,index){
+                if(
+                    !task.name.
+                    toLowerCase()
+                    .includes(searchText)
+                )
+                {
+                return;
+                }
+                if(
+                    selectedFilter === "pending"
+                    && task.completed === true
+                )
+                {
+                    return;
+                }
+                if(
+                    selectedFilter === "completed"
+                    && task.completed === false
+                ) 
+                {
+                    return;
+                }
+                let li = document.createElement("li");
+                let span = document.createElement("span");
+                span.textcontent=task.name+"";
+                if(task.complete){
+                    span.classlist.add("complete");
+                }
+                let priorityText=document.createElement("span");
+                priorityText.textcontent ="["+task.priority +"]";
+                prorityText.classList.add(task.prority.toLowercase());
+                let dateText=document.createElement("span");
+                if (task.date!=="") {
+                    dateText.textcontent="24"+task.date;
+                }
+                let completeBtn=document.createElement("button");
+                completeBtn.textconent="complete";
+                completeBtn.addEventListener("click",function(){
+                    task.completed=!task.completed;
+                    displayTasks();
+                }
+                );
+                let editBtn=document.createElement("button");
+                editBtn.textcontent="edit";
+                editBtn.addEventListener("click",function(){
+                    taskinput.value=tasj.name;
+                    taskdate.value=task.date;
+                    priority.value=task.priority;
+                    editindex=index;
+                    addBtn.textcontent="update task";
+                }
+                );
+                let deleteBtn=document.createElement("button");
+                deleteBtn.addEventListener("click",function(){
+                    tasks.splice(index,1);
+                    displaytasks();
+                }
+                );
+                li.appendchild(span);
+                li.appendchild(prioritytext);
+                li.appendchild(datetext);
+                li.appendchild(completeBtn);
+                li.appendchild(editBtn);
+                li.appendchild(deleteBtn);
+                taskList.appendchild(li);
+                displayNumber++;
+        });
+            updatecounter();
+        }
+        function updatecounter(){
+            let total=tasks.length;
+            let completed=tasks.fliter(function(task){
+                return task.completed===true;
+            });length;
+            let panding=total-completed;
+            counter.textcontext="total:"+total+"|completed:"+completed+"+" |pending;"+pending" ;
+        }
+        fliter.addEventListener("change",function(){
+            displayTasks();
+        }
+        );
+        taskinput.addEventListener("keydown",function(event){
+            if (event.key==="enter"){
+                addBtn.click();
+                
+            }
+        }
+        );
+    </script>
+    </body>
+</html>
+
+Not connected. Connecting in 4s…
