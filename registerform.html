@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm">
+
+        <label>Name:</label>
+        <inputtype="text" id="name">
+        <br><br>
+
+        <label>Email:</label>
+        <inputtype="email" id="email">
+        <br><br>
+
+        <label>Password:</label>
+        <inputtype="password" id="password">
+        <br><br>
+
+        <label>Confirm Password:</label>
+        <inputtype="password" id="confirmPassword">
+        <br><br>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let message = document.getElementById("message");
+
+            if (name === "" || email === "" || password === "" || confirmPassword === "") {
+                message.innerHTML = "Please fill all fields.";
+                return;
+            }
+
+            if (password.length < 6) {
+                message.innerHTML = "Password must be at least 6 characters.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                message.innerHTML = "Passwords do not match.";
+                return;
+            }
+
+            message.innerHTML = "Registration successful!";
+
+        });
+    </script>
+
+</body>
+</html>
+
