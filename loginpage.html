@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>"login page"</title>
+</head>
+<body>
+    <h2>login</h2>
+    <label>username</label>
+    <inputtype="text" id="username">
+
+    <br><br>
+
+    <label>password</label>
+    <inputtype="password" id="password">
+    <br><br>
+    <button id="loginbutton">login</button>
+    <p id="message"></p>
+    <script>
+
+        let username=document.getElementById("username");
+        let password=document.getElementById("password");
+        let loginbutton=document.getElementById("loginbutton");
+        let message=document.getElementById("message");
+        loginbutton.addEventListener("click",function(){
+            let user=username.value;
+            let pass=password.value;
+            if (user=="adminlalli" && pass=="2429"){
+                localStorage.setItem("username",user);
+                localStorage.setItem("password",user);
+                message.innerHTML="login successful";
+            }
+            else{
+                message.innerHTML="login unsuccessful";
+            }
+    });
+    </script>
+</body>
+</html>
