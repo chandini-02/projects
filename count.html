@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter app</title>
+</head>
+  <body>
+    <h1>counter app</h1>
+    <h2 id="count">0 </h2>
+    <button onclick="increase()">+</button>
+    <button onclick="decrease()">-</button>
+    <button onclick="resart()">reset</button>
+    <script>
+        let count=0;
+        function increase(){
+            count++;
+            document.getElementById("count").innerText=count;
+        }
+         function decrease(){
+            count--;
+            document.getElementById("count").innerText=count;
+        }
+        function resart(){
+            count=0;
+            document.getElementById("count").innerText=count;
+        }
+    </script>
+</body>
+</html>
+
